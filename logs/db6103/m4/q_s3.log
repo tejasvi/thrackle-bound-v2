@@ -1,0 +1,11 @@
+filter sys/T337s_C10.sys: h=10 systems=6059712
+filter sys/T337s_C10.sys: h=10 systems=6059712
+[60s] tests=3481825 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:0/0 e10:3369/3368 e11:98071/98070 e12:0/0
+[120s] tests=7076607 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:0/0 e10:4977/4976 e11:203378/203377 e12:0/0
+[180s] tests=10557258 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:0/0 e10:6471/6470 e11:292822/292822 e12:0/0
+[240s] tests=13923883 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:0/0 e10:8753/8752 e11:382724/382723 e12:0/0
+[300s] tests=17165841 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:0/0 e10:10049/10048 e11:460499/460498 e12:0/0
+states: total seen 1211878, run in this slice 296
+[344s] tests=18690980 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:0/0 e10:11245/11245 e11:496234/496234 e12:0/0
+RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=18690980  planar=8029475  filter_prunes=354469830  wall=343.57s
+choices per edge: e0:0 e1:0 e2:0 e3:0 e4:0 e5:0 e6:0 e7:0 e8:0 e9:0 e10:960668 e11:44378745 e12:327313918

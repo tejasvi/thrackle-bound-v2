@@ -1,0 +1,30 @@
+r_u2c6_0: cycles of length 5..8: 6 6 6 6 8 8 RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=540864  planar=97913  filter_prunes=1183753  wall=2.38s 
+
+r_u2c6_1: cycles of length 5..8: 6 6 6 6 6 8 RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=39498  planar=8019  filter_prunes=87747  wall=0.13s 
+
+r_u2c6_2: cycles of length 5..8: 6 6 8 RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=48824  planar=14289  filter_prunes=206267  wall=0.18s 
+
+r_u2c6_3: cycles of length 5..8: 5 5 5 5 6 6 8 RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=41  planar=32  filter_prunes=195  wall=0.00s 
+
+r_udb_6: cycles of length 5..8: 6 8 8 RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=6024873  planar=2290137  filter_prunes=56969298  wall=34.46s 
+
+r_union_7: cycles of length 5..8: 5 5 6 7 8 RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=80908  planar=12729  filter_prunes=138200  wall=0.27s 
+
+r_union_8: cycles of length 5..8: 5 5 6 7 8 RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=34089  planar=5740  filter_prunes=45895  wall=0.10s 
+
+r_union_9: cycles of length 5..8: 5 5 5 6 8 RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=80908  planar=12729  filter_prunes=138200  wall=0.27s 
+
+r_union_10: cycles of length 5..8: 5 5 5 6 8 RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=684  planar=228  filter_prunes=1341  wall=0.00s 
+
+r_union_11: cycles of length 5..8: 5 6 7 7 7 8 RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=245882  planar=42455  filter_prunes=796521  wall=0.98s 
+
+r_union_12: cycles of length 5..8: 5 5 6 7 7 8 RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=25088  planar=4397  filter_prunes=45748  wall=0.08s 
+
+r_union_13: cycles of length 5..8: 5 5 6 7 7 8 RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=3139  planar=956  filter_prunes=9576  wall=0.01s 
+
+r_union_14: cycles of length 5..8: 5 5 6 7 7 8 RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=1885  planar=461  filter_prunes=2964  wall=0.00s 
+
+r_union_15: cycles of length 5..8: 5 5 5 6 7 8 8 RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=69  planar=34  filter_prunes=123  wall=0.00s 
+
+r_union_16: cycles of length 5..8: 5 5 6 7 7 8 RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=187727  planar=34775  filter_prunes=587287  wall=0.73s 
+

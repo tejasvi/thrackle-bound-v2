@@ -1,0 +1,12 @@
+filter sys/T337s_C10.sys: h=10 systems=6059712
+filter sys/T337s_C10.sys: h=10 systems=6059712
+[60s] tests=2099277 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:0/0 e10:2098/2097 e11:68538/68537 e12:0/0
+[120s] tests=4205806 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:0/0 e10:2932/2931 e11:112972/112972 e12:0/0
+[180s] tests=6403157 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:0/0 e10:4091/4090 e11:166800/166800 e12:0/0
+[240s] tests=9321978 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:0/0 e10:5567/5566 e11:245142/245141 e12:0/0
+[300s] tests=12955537 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:0/0 e10:8343/8342 e11:352967/352966 e12:0/0
+[360s] tests=16623520 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:0/0 e10:9165/9164 e11:423714/423713 e12:0/0
+states: total seen 1211878, run in this slice 295
+[404s] tests=19350975 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:0/0 e10:11572/11572 e11:486528/486528 e12:0/0
+RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=19350975  planar=8546883  filter_prunes=375138692  wall=404.42s
+choices per edge: e0:0 e1:0 e2:0 e3:0 e4:0 e5:0 e6:0 e7:0 e8:0 e9:0 e10:952526 e11:45963630 e12:347075411

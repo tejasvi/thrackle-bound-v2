@@ -1,0 +1,565 @@
+{
+ "6": {
+  "free": 3,
+  "method_a": 0,
+  "method_b": 0,
+  "equal": true,
+  "walks": [],
+  "excluded_two_c6": 0,
+  "excluded_c6c8": 0,
+  "excluded_either": 0
+ },
+ "5": {
+  "free": 4,
+  "method_a": 3,
+  "method_b": 3,
+  "equal": true,
+  "walks": [
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     2,
+     7,
+     8
+    ],
+    "n": 9,
+    "m": 11,
+    "n_c6": 2,
+    "n_c8": 0,
+    "two_c6_common_vertex": true,
+    "c6_c8_common_edge": false
+   },
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     3,
+     8
+    ],
+    "n": 9,
+    "m": 11,
+    "n_c6": 2,
+    "n_c8": 0,
+    "two_c6_common_vertex": true,
+    "c6_c8_common_edge": false
+   },
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "n": 10,
+    "m": 11,
+    "n_c6": 2,
+    "n_c8": 0,
+    "two_c6_common_vertex": true,
+    "c6_c8_common_edge": false
+   }
+  ],
+  "excluded_two_c6": 3,
+  "excluded_c6c8": 0,
+  "excluded_either": 3
+ },
+ "4": {
+  "free": 5,
+  "method_a": 4,
+  "method_b": 4,
+  "equal": true,
+  "walks": [
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     6,
+     1,
+     7,
+     8,
+     9
+    ],
+    "n": 10,
+    "m": 12,
+    "n_c6": 1,
+    "n_c8": 1,
+    "two_c6_common_vertex": false,
+    "c6_c8_common_edge": true
+   },
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     6,
+     7,
+     2,
+     8,
+     9
+    ],
+    "n": 10,
+    "m": 12,
+    "n_c6": 1,
+    "n_c8": 1,
+    "two_c6_common_vertex": false,
+    "c6_c8_common_edge": true
+   },
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     6,
+     7,
+     8,
+     3,
+     9
+    ],
+    "n": 10,
+    "m": 12,
+    "n_c6": 1,
+    "n_c8": 1,
+    "two_c6_common_vertex": false,
+    "c6_c8_common_edge": true
+   },
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
+    "n": 11,
+    "m": 12,
+    "n_c6": 1,
+    "n_c8": 1,
+    "two_c6_common_vertex": false,
+    "c6_c8_common_edge": true
+   }
+  ],
+  "excluded_two_c6": 0,
+  "excluded_c6c8": 4,
+  "excluded_either": 4
+ },
+ "3": {
+  "free": 6,
+  "method_a": 19,
+  "method_b": 19,
+  "equal": true,
+  "walks": [
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     6,
+     0,
+     5,
+     4,
+     3,
+     6
+    ],
+    "n": 7,
+    "m": 8,
+    "n_c6": 1,
+    "n_c8": 0,
+    "two_c6_common_vertex": false,
+    "c6_c8_common_edge": false
+   },
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     6,
+     0,
+     5,
+     4,
+     7,
+     8
+    ],
+    "n": 9,
+    "m": 11,
+    "n_c6": 2,
+    "n_c8": 0,
+    "two_c6_common_vertex": true,
+    "c6_c8_common_edge": false
+   },
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     6,
+     0,
+     5,
+     7,
+     8,
+     6
+    ],
+    "n": 9,
+    "m": 11,
+    "n_c6": 2,
+    "n_c8": 1,
+    "two_c6_common_vertex": true,
+    "c6_c8_common_edge": true
+   },
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     6,
+     0,
+     5,
+     7,
+     8,
+     9
+    ],
+    "n": 10,
+    "m": 12,
+    "n_c6": 1,
+    "n_c8": 1,
+    "two_c6_common_vertex": false,
+    "c6_c8_common_edge": true
+   },
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     6,
+     0,
+     7,
+     8,
+     3,
+     6
+    ],
+    "n": 9,
+    "m": 11,
+    "n_c6": 3,
+    "n_c8": 0,
+    "two_c6_common_vertex": true,
+    "c6_c8_common_edge": false
+   },
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     6,
+     0,
+     7,
+     8,
+     9,
+     6
+    ],
+    "n": 10,
+    "m": 12,
+    "n_c6": 1,
+    "n_c8": 2,
+    "two_c6_common_vertex": false,
+    "c6_c8_common_edge": true
+   },
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     6,
+     0,
+     7,
+     8,
+     9,
+     10
+    ],
+    "n": 11,
+    "m": 13,
+    "n_c6": 1,
+    "n_c8": 0,
+    "two_c6_common_vertex": false,
+    "c6_c8_common_edge": false
+   },
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     6,
+     7,
+     1,
+     8,
+     9,
+     10
+    ],
+    "n": 11,
+    "m": 13,
+    "n_c6": 1,
+    "n_c8": 0,
+    "two_c6_common_vertex": false,
+    "c6_c8_common_edge": false
+   },
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     6,
+     7,
+     5,
+     4,
+     3,
+     8
+    ],
+    "n": 9,
+    "m": 11,
+    "n_c6": 2,
+    "n_c8": 0,
+    "two_c6_common_vertex": true,
+    "c6_c8_common_edge": false
+   },
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     6,
+     7,
+     5,
+     4,
+     8,
+     9
+    ],
+    "n": 10,
+    "m": 12,
+    "n_c6": 1,
+    "n_c8": 1,
+    "two_c6_common_vertex": false,
+    "c6_c8_common_edge": true
+   },
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     6,
+     7,
+     5,
+     8,
+     9,
+     10
+    ],
+    "n": 11,
+    "m": 13,
+    "n_c6": 1,
+    "n_c8": 0,
+    "two_c6_common_vertex": false,
+    "c6_c8_common_edge": false
+   },
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     6,
+     7,
+     8,
+     2,
+     9,
+     10
+    ],
+    "n": 11,
+    "m": 13,
+    "n_c6": 1,
+    "n_c8": 0,
+    "two_c6_common_vertex": false,
+    "c6_c8_common_edge": false
+   },
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     6,
+     7,
+     8,
+     4,
+     3,
+     6
+    ],
+    "n": 9,
+    "m": 11,
+    "n_c6": 2,
+    "n_c8": 1,
+    "two_c6_common_vertex": true,
+    "c6_c8_common_edge": true
+   },
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     6,
+     7,
+     8,
+     4,
+     3,
+     9
+    ],
+    "n": 10,
+    "m": 12,
+    "n_c6": 1,
+    "n_c8": 1,
+    "two_c6_common_vertex": false,
+    "c6_c8_common_edge": true
+   },
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     6,
+     7,
+     8,
+     4,
+     9,
+     10
+    ],
+    "n": 11,
+    "m": 13,
+    "n_c6": 1,
+    "n_c8": 0,
+    "two_c6_common_vertex": false,
+    "c6_c8_common_edge": false
+   },
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     6,
+     7,
+     8,
+     9,
+     3,
+     6
+    ],
+    "n": 10,
+    "m": 12,
+    "n_c6": 1,
+    "n_c8": 2,
+    "two_c6_common_vertex": false,
+    "c6_c8_common_edge": true
+   },
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     6,
+     7,
+     8,
+     9,
+     3,
+     10
+    ],
+    "n": 11,
+    "m": 13,
+    "n_c6": 1,
+    "n_c8": 0,
+    "two_c6_common_vertex": false,
+    "c6_c8_common_edge": false
+   },
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     6,
+     7,
+     8,
+     9,
+     10,
+     6
+    ],
+    "n": 11,
+    "m": 13,
+    "n_c6": 1,
+    "n_c8": 0,
+    "two_c6_common_vertex": false,
+    "c6_c8_common_edge": false
+   },
+   {
+    "walk": [
+     0,
+     1,
+     2,
+     3,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ],
+    "n": 12,
+    "m": 13,
+    "n_c6": 1,
+    "n_c8": 0,
+    "two_c6_common_vertex": false,
+    "c6_c8_common_edge": false
+   }
+  ],
+  "excluded_two_c6": 5,
+  "excluded_c6c8": 7,
+  "excluded_either": 10
+ }
+}

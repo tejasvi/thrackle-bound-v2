@@ -1,0 +1,26 @@
+states: total seen 99, run in this slice 2
+[51s] tests=4153901 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:43/43 e8:1654/1654 e9:21/21
+PLANAR COMPLETE SYSTEM #1:
+  pi_0 (0->1): 3 5 2 4 7 6 8
+  pi_1 (1->2): 8 9 4 6 7 3 5
+  pi_2 (2->3): 5 9 4 0 6 8 7
+  pi_3 (3->4): 7 8 6 5 0 9 1
+  pi_4 (4->5): 7 6 1 8 0 2 9
+  pi_5 (5->6): 2 1 9 0 3 7 8
+  pi_6 (6->7): 3 2 8 1 4 9 0
+  pi_7 (7->8): 0 9 4 1 2 3 5
+  pi_8 (8->9): 5 3 2 6 4 0 1
+  pi_9 (9->0): 1 6 7 2 4 5 3
+PLANAR COMPLETE SYSTEM #2:
+  pi_0 (0->1): 3 5 2 4 7 6 8
+  pi_1 (1->2): 8 9 4 6 7 3 5
+  pi_2 (2->3): 5 4 9 0 6 8 7
+  pi_3 (3->4): 7 8 6 5 0 9 1
+  pi_4 (4->5): 7 6 1 8 0 9 2
+  pi_5 (5->6): 2 1 9 0 3 7 8
+  pi_6 (6->7): 3 2 8 1 4 9 0
+  pi_7 (7->8): 0 9 4 1 2 3 5
+  pi_8 (8->9): 5 3 2 6 4 0 1
+  pi_9 (9->0): 1 6 7 4 2 5 3
+RESULT COUNT  complete_planar_systems=21  planarity_tests=4153901  planar=219747  filter_prunes=0  wall=51.36s
+choices per edge: e0:0 e1:0 e2:0 e3:0 e4:0 e5:0 e6:0 e7:2621 e8:211565 e9:3925908

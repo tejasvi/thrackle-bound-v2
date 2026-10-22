@@ -1,0 +1,3 @@
+# DB(6,8,-3), six filters, two edge orders
+RESULT graph=dbprep/DB68m3.txt m=11 complete_planar=0 NOT_THRACKLEABLE tests=23446740 planar_tests=3188001 dumped=0 resumed=0 filtered_at_resume=0 secs=493.0
+RESULT graph=dbprep/DB68m3_6first.txt m=11 complete_planar=0 NOT_THRACKLEABLE tests=4420854 planar_tests=1467613 dumped=0 resumed=0 filtered_at_resume=0 secs=170.9

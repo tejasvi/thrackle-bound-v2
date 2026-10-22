@@ -1,0 +1,12 @@
+r66_u66v_4: cycles of length 5..8: 5 5 5 5 6 6 8 RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=33  planar=25  filter_prunes=94  wall=0.00s 
+
+r66_u66v_5: cycles of length 5..8: 5 5 5 6 6 7 RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=625  planar=157  filter_prunes=632  wall=0.00s 
+
+r66_u66v_6: cycles of length 5..8: 6 6 6 6 6 6 RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=157947  planar=29709  filter_prunes=343928  wall=0.61s 
+
+r66_u66v_7: cycles of length 5..8: 5 5 6 6 7 7 RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=1320  planar=310  filter_prunes=1813  wall=0.00s 
+
+r66_u66e_3: cycles of length 5..8: 5 5 5 5 6 6 8 RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=51  planar=30  filter_prunes=125  wall=0.00s 
+
+r66_u66e_4: cycles of length 5..8: 5 5 5 6 6 7 RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=157  planar=50  filter_prunes=214  wall=0.00s 
+

@@ -1,0 +1,11 @@
+share 0: states run 115702
+share 1: states run 115702
+share 2: states run 115702
+share 3: states run 115702
+share 4: states run 115702
+share 5: states run 115701
+slices with RESULT: 576/576  verdicts: {'NOT_THRACKLEABLE': 576}
+states run total: 694211  symmetric states in file: 694211
+planarity tests total: 207380593775  max slice wall: 15317 s  sum wall: 7765559 s
+BAD: none
+VERDICT: DB(6,8,-1) NOT THRACKLEABLE (all states exhausted)

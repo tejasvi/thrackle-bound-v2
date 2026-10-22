@@ -1,0 +1,64 @@
+{
+ "A": {
+  "parts": 4096,
+  "states": 143557,
+  "missing": [],
+  "bad_resumed": [],
+  "tests": 22926241152,
+  "planar_tests": 1255235826,
+  "cpu_seconds": 818530.100000002,
+  "longest_part_seconds": 321.6,
+  "complete_planar": 6059712,
+  "dumped": 0,
+  "filtered_at_resume": 0,
+  "verdicts": {
+   "count": 4096
+  },
+  "resumed": 143557,
+  "cover_exactly_once": true,
+  "cpu_hours": 227.4,
+  "list_lines": 6059712,
+  "list_ok": true
+ },
+ "B": {
+  "parts": 1024,
+  "states": 32626,
+  "missing": [],
+  "bad_resumed": [],
+  "tests": 16690052,
+  "planar_tests": 7282416,
+  "cpu_seconds": 143693.40000000043,
+  "longest_part_seconds": 323.1,
+  "complete_planar": 0,
+  "dumped": 1211878,
+  "filtered_at_resume": 0,
+  "verdicts": {
+   "count": 1024
+  },
+  "resumed": 32626,
+  "cover_exactly_once": true,
+  "cpu_hours": 39.9,
+  "l10_lines": 1211878,
+  "l10_ok": true
+ },
+ "C": {
+  "parts": 4096,
+  "states": 32626,
+  "missing": [],
+  "bad_resumed": [],
+  "tests": 83418336044,
+  "planar_tests": 36316208498,
+  "cpu_seconds": 5735959.3000000045,
+  "longest_part_seconds": 7147.9,
+  "complete_planar": 0,
+  "dumped": 0,
+  "filtered_at_resume": 0,
+  "verdicts": {
+   "NOT_THRACKLEABLE": 4096
+  },
+  "resumed": 32626,
+  "cover_exactly_once": true,
+  "cpu_hours": 1593.3,
+  "all_not_thrackleable": true
+ }
+}

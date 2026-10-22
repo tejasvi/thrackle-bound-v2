@@ -1,0 +1,7 @@
+filter sys/T337s_C10_prov.sys: h=10 systems=6044936
+filter sys/T337s_C10_prov.sys: h=10 systems=6044936
+[60s] tests=2619707 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:50/49 e10:1873/1872 e11:138376/138375 e12:0/0
+states: total seen 64, run in this slice 1
+[106s] tests=4670219 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:89/89 e10:4065/4065 e11:246340/246340 e12:0/0
+RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=4670219  planar=2594381  filter_prunes=113641999  wall=106.24s
+choices per edge: e0:0 e1:0 e2:0 e3:0 e4:0 e5:0 e6:0 e7:0 e8:0 e9:4414 e10:337833 e11:22628125 e12:95091352

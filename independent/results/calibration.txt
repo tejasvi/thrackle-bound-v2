@@ -1,0 +1,10 @@
+# complete planar crossing systems (count mode) and two dumbbells decided without filters
+RESULT graph=graphs/C3.txt m=3 complete_planar=1 count tests=3 planar_tests=3 dumped=0 resumed=0 filtered_at_resume=0 secs=0.0
+RESULT graph=graphs/C4.txt m=4 complete_planar=0 count tests=6 planar_tests=5 dumped=0 resumed=0 filtered_at_resume=0 secs=0.0
+RESULT graph=graphs/C5.txt m=5 complete_planar=1 count tests=50 planar_tests=29 dumped=0 resumed=0 filtered_at_resume=0 secs=0.0
+RESULT graph=graphs/C6.txt m=6 complete_planar=8 count tests=1177 planar_tests=329 dumped=0 resumed=0 filtered_at_resume=0 secs=0.0
+RESULT graph=graphs/C7.txt m=7 complete_planar=92 count tests=46985 planar_tests=7672 dumped=0 resumed=0 filtered_at_resume=0 secs=0.4
+RESULT graph=graphs/C8.txt m=8 complete_planar=2544 count tests=2629879 planar_tests=273969 dumped=0 resumed=0 filtered_at_resume=0 secs=28.6
+RESULT graph=graphs/C8p.txt m=9 complete_planar=60196 count tests=7241843 planar_tests=716069 dumped=0 resumed=0 filtered_at_resume=0 secs=93.4
+RESULT graph=graphs/DB66m3.txt m=9 complete_planar=0 NOT_THRACKLEABLE tests=532017 planar_tests=43919 dumped=0 resumed=0 filtered_at_resume=0 secs=6.7
+RESULT graph=graphs/DB66m2.txt m=10 complete_planar=0 NOT_THRACKLEABLE tests=35586625 planar_tests=2069135 dumped=0 resumed=0 filtered_at_resume=0 secs=592.5

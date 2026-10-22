@@ -1,0 +1,18 @@
+{
+ "chunks": 4079,
+ "states": 32626,
+ "by_orig": 4010,
+ "by_split": 16,
+ "by_both": 53,
+ "undecided": [],
+ "bad": [],
+ "thrackleable": [],
+ "orig_tests": 53475029361,
+ "orig_secs": 3716838.7999999993,
+ "split_tasks": 28413,
+ "split_tests": 5213734650,
+ "split_secs": 354050.0999999999,
+ "filtered_at_resume": 0,
+ "n_undecided": 0,
+ "verdict": "ALL 4079 CHUNKS (32626 level-9 states) NOT_THRACKLEABLE"
+}

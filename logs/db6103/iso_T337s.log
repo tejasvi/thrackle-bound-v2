@@ -1,0 +1,3 @@
+graphs/T337s.txt n=12 m=13 isomorphic to theta(3,3,7): True
+graphs/u610_3_4.txt n=12 m=13 isomorphic to theta(3,3,7): True
+graphs/DB_6_10_-3.txt n=12 m=13 isomorphic to theta(3,3,7): True

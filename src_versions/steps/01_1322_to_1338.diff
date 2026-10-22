@@ -1,0 +1,88 @@
+--- thr2_1322.c
++++ thr2_1338.c
+@@ -34,8 +34,15 @@
+ static int timed_out = 0;
+ static long long level_tests[MAXE];
+ static long long choices = 0;
+-
+ static double now(void) { struct timespec ts; clock_gettime(CLOCK_MONOTONIC, &ts); return ts.tv_sec + 1e-9 * ts.tv_nsec; }
++static long long closed_cnt[MAXE], done_cnt[MAXE];
++static double last_prog = 0;
++static void progress(void) {
++    fprintf(stderr, "[%.0fs] tests=%lld closed/done:", now() - t0, tests);
++    for (int k = 0; k < m; k++) fprintf(stderr, " e%d:%lld/%lld", k, closed_cnt[k], done_cnt[k]);
++    fprintf(stderr, "\n");
++}
++
+ 
+ /* ---------- G' construction and planarity ---------- */
+ static int GU[LR_MAXM], GV[LR_MAXM], gm, gn;
+@@ -117,7 +124,7 @@
+     if (!eq) { fprintf(stderr, "bad filter spec\n"); exit(1); }
+     *eq = 0; strncpy(F->name, buf, 255);
+     int h = 0;
+-    for (char *tok = strtok(eq + 1, ","); tok; tok = strtok(NULL, ",")) F->hmap[h++] = atoi(tok);
++    for (char *tok = strtok(eq + 1, ","); tok; tok = strtok(NULL, ",")) F->hmap[h++] = (tok[0] == 'x') ? -1 : atoi(tok);
+     FILE *fp = fopen(buf, "r");
+     if (!fp) { fprintf(stderr, "cannot open %s\n", buf); exit(1); }
+     int hh, nH;
+@@ -127,6 +134,7 @@
+     for (int i = 0; i < h; i++) {
+         if (fscanf(fp, "%d %d", &HU[i], &HV[i]) != 2) exit(1);
+         int g = F->hmap[i];
++        if (g < 0) continue;
+         int a[2] = {HU[i], HV[i]}, b[2] = {EU[g], EV[g]};
+         for (int s = 0; s < 2; s++) {
+             if (vmap[a[s]] < 0) vmap[a[s]] = b[s];
+@@ -136,7 +144,7 @@
+     for (int i = 0; i < nH; i++) for (int j = i + 1; j < nH; j++)
+         if (vmap[i] >= 0 && vmap[i] == vmap[j]) { fprintf(stderr, "filter %s: vertex map not injective\n", buf); exit(1); }
+     for (int g = 0; g < m; g++) F->inH[g] = -1;
+-    for (int i = 0; i < h; i++) F->inH[F->hmap[i]] = i;
++    for (int i = 0; i < h; i++) if (F->hmap[i] >= 0) F->inH[F->hmap[i]] = i;
+     /* read systems */
+     int cap = 1024, ns = 0;
+     int *R = malloc(sizeof(int) * (size_t)cap * h * h);   /* rank[s][e][x] */
+@@ -162,6 +170,7 @@
+     for (int s = 0; s < ns; s++)
+         for (int e = 0; e < h; e++)
+             for (int x = 0; x < h; x++) {
++                if (F->hmap[e] < 0 || F->hmap[x] < 0) continue;
+                 int want = nonadj[F->hmap[e]][F->hmap[x]];
+                 int have = R[(size_t)s * h * h + e * h + x] >= 0;
+                 if (want != have) { fprintf(stderr, "filter %s: partner set mismatch\n", buf); exit(1); }
+@@ -215,7 +224,12 @@
+ static int trace(int k, int t) {
+     if (timed_out) return 0;
+     if (t == nF[k]) {
+-        if (build_and_test(k, 1)) return search_edge(k + 1);
++        if (build_and_test(k, 1)) {
++            closed_cnt[k]++;
++            int r = search_edge(k + 1);
++            if (!timed_out) done_cnt[k]++;
++            return r;
++        }
+         return 0;
+     }
+     for (int q = 0; q < nF[k]; q++) {
+@@ -236,7 +250,11 @@
+             }
+             for (int j = p; j < len[f] - 1; j++) row[f][j] = row[f][j + 1];
+             len[f]--;
+-            if ((++choices & 0xFFFF) == 0 && now() - t0 > maxsec) timed_out = 1;
++            if ((++choices & 0xFFFF) == 0) {
++                double tn = now() - t0;
++                if (tn > maxsec) timed_out = 1;
++                if (tn - last_prog > 60) { last_prog = tn; progress(); }
++            }
+             if (timed_out) { len[k] = t; used[k][f] = 0; return 0; }
+         }
+         len[k] = t;
+@@ -300,6 +318,7 @@
+     const char *verdict = timed_out ? "TIMEOUT" : count_mode ? "COUNT" : (res ? "THRACKLEABLE" : "NOT_THRACKLEABLE");
+     printf("RESULT %s  complete_planar_systems=%lld  planarity_tests=%lld  planar=%lld  filter_prunes=%lld  wall=%.2fs\n",
+            verdict, complete_found, tests, planar_hits, fprunes, dt);
++    progress();
+     printf("choices per edge:");
+     for (int k = 0; k < m; k++) printf(" e%d:%lld", k, level_tests[k]);
+     printf("\n");

@@ -1,0 +1,14 @@
+## dump at level 5, resume all, resume in 3 slices
+RESULT graph=C8p.txt m=9 complete_planar=0 count tests=177 planar_tests=91 dumped=19 resumed=0 filtered_at_resume=0 secs=0.0
+RESULT graph=C8p.txt m=9 complete_planar=60196 count tests=7241666 planar_tests=715978 dumped=0 resumed=19 filtered_at_resume=0 secs=69.5
+RESULT graph=C8p.txt m=9 complete_planar=22025 count tests=2613859 planar_tests=256482 dumped=0 resumed=7 filtered_at_resume=0 secs=22.4
+RESULT graph=C8p.txt m=9 complete_planar=28301 count tests=3153355 planar_tests=315435 dumped=0 resumed=6 filtered_at_resume=0 secs=27.2
+RESULT graph=C8p.txt m=9 complete_planar=9870 count tests=1474452 planar_tests=144061 dumped=0 resumed=6 filtered_at_resume=0 secs=12.8
+## with the C8 filter: dump at level 6, resume
+RESULT graph=C8p.txt m=9 complete_planar=0 count tests=511 planar_tests=511 dumped=112 resumed=0 filtered_at_resume=0 secs=0.0
+RESULT graph=C8p.txt m=9 complete_planar=60196 count tests=4627468 planar_tests=457604 dumped=0 resumed=112 filtered_at_resume=0 secs=43.3
+## two steps: level 3, then level 7, resume
+RESULT graph=C8p.txt m=9 complete_planar=0 count tests=4 planar_tests=4 dumped=1 resumed=0 filtered_at_resume=0 secs=0.0
+RESULT graph=C8p.txt m=9 complete_planar=0 count tests=172428 planar_tests=30278 dumped=4671 resumed=1 filtered_at_resume=0 secs=1.0
+RESULT graph=C8p.txt m=9 complete_planar=60196 count tests=7069411 planar_tests=685787 dumped=0 resumed=4671 filtered_at_resume=0 secs=60.7
+DONE

@@ -1,0 +1,20 @@
+{
+ "u66_000_DB6_6_0": {
+  "L9": 32626,
+  "slices": 400,
+  "bad": [],
+  "resumed": 32626,
+  "tests": 5072490935,
+  "cpu_s": 200295,
+  "verdict": "NOT_THRACKLEABLE (all 32626 level-9 states)"
+ },
+ "u66_001_DB6_6_-1": {
+  "L9": 14464,
+  "slices": 200,
+  "bad": [],
+  "resumed": 14464,
+  "tests": 85971808,
+  "cpu_s": 2909,
+  "verdict": "NOT_THRACKLEABLE (all 14464 level-9 states)"
+ }
+}

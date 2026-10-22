@@ -1,0 +1,2 @@
+# C9 = inputs/graphs/C9.txt, version 1, no filters
+RESULT graph=graphs/C9.txt m=9 complete_planar=72916 count tests=204998075 planar_tests=15135805 dumped=0 resumed=0 filtered_at_resume=0 secs=5281.7

@@ -1,0 +1,9 @@
+== DB(6,6,0) (graphs/DB_6_6_0r.txt) decision on a 32-thread machine (one thread), filters C6b, Ha, Hb, H01, H54, H05 (sys/DB660r_*.sys)
+filter sys/DB660r_C6b.sys: h=6 systems=8
+filter sys/DB660r_Ha.sys: h=7 systems=68
+filter sys/DB660r_Hb.sys: h=7 systems=68
+filter sys/DB660r_H01.sys: h=8 systems=1278
+filter sys/DB660r_H54.sys: h=8 systems=1278
+filter sys/DB660r_H05.sys: h=8 systems=716
+RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=104319593  planar=12375473  filter_prunes=190877200  wall=1129.90s
+choices per edge: e0:0 e1:0 e2:1 e3:7 e4:144 e5:954 e6:1864 e7:106890 e8:1650220 e9:25272004 e10:179433388 e11:87807834

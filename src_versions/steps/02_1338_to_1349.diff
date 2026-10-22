@@ -1,0 +1,97 @@
+--- thr2_1338.c
++++ thr2_1349.c
+@@ -217,6 +217,31 @@
+     return 1;
+ }
+ 
++/* init filter bitsets (depth 0) from the current complete state of edges 0..L-1 */
++static int filters_init_state(int L) {
++    for (int i = 0; i < nfl; i++) {
++        Filter *F = &FL[i];
++        uint64_t *c = F->cur;
++        memset(c, 0, sizeof(uint64_t) * F->W);
++        for (int s2 = 0; s2 < F->nsys; s2++) c[s2 >> 6] |= 1ULL << (s2 & 63);
++        for (int e = 0; e < L; e++) {
++            int a = F->inH[e];
++            if (a < 0) continue;
++            int prev = -1;
++            for (int t = 0; t < len[e]; t++) {
++                int x = F->inH[row[e][t]];
++                if (x < 0) continue;
++                if (prev >= 0) { uint64_t *p = P_(F, a, prev, x); for (int w = 0; w < F->W; w++) c[w] &= p[w]; }
++                prev = x;
++            }
++        }
++        uint64_t any = 0;
++        for (int w = 0; w < F->W; w++) any |= c[w];
++        if (!any) return 0;
++    }
++    return 1;
++}
++
+ /* ---------- search ---------- */
+ static int nF[MAXE], FF[MAXE][MAXE];
+ static int search_edge(int k);
+@@ -287,6 +312,8 @@
+     return trace(k, 0);
+ }
+ 
++static char *statesfile = NULL; static int slice_i = 0, slice_n = 1;
++
+ int main(int argc, char **argv) {
+     if (argc < 2) { fprintf(stderr, "usage: thr2 GRAPH [--count] [--dump FILE] [--filter SYS=map]... [--maxsec S]\n"); return 1; }
+     FILE *fp = fopen(argv[1], "r");
+@@ -305,6 +332,8 @@
+         }
+         else if (!strcmp(argv[i], "--filter") && i + 1 < argc) load_filter(argv[++i]);
+         else if (!strcmp(argv[i], "--maxsec") && i + 1 < argc) maxsec = atof(argv[++i]);
++        else if (!strcmp(argv[i], "--states") && i + 1 < argc) statesfile = argv[++i];
++        else if (!strcmp(argv[i], "--slice") && i + 1 < argc) { if (sscanf(argv[++i], "%d/%d", &slice_i, &slice_n) != 2) return 1; }
+         else { fprintf(stderr, "unknown arg %s\n", argv[i]); return 1; }
+     }
+     for (int k = 0; k < m; k++) {
+@@ -312,7 +341,43 @@
+         for (int f = 0; f < k; f++) if (nonadj[k][f]) FF[k][nF[k]++] = f;
+     }
+     t0 = now();
+-    int res = search_edge(0);
++    int res = 0;
++    long long nstates = 0, nstates_run = 0;
++    if (!statesfile) res = search_edge(0);
++    else {
++        FILE *sf = fopen(statesfile, "r");
++        if (!sf) { fprintf(stderr, "cannot open states\n"); return 1; }
++        static char line[1 << 16];
++        int hdr = 0;
++        while (fgets(line, sizeof line, sf)) {
++            if (line[0] == 'H') { int hh, nh; sscanf(line, "H %d %d", &hh, &nh); hdr = hh; for (int q = 0; q < hh; q++) if (!fgets(line, sizeof line, sf)) return 1; continue; }
++            if (line[0] == '\n') continue;
++            long long idx = nstates++;
++            if (idx % slice_n != slice_i) continue;
++            memset(len, 0, sizeof len); memset(used, 0, sizeof used);
++            char *p = line; int e = 0;
++            while (*p && *p != '\n') {
++                if (*p == '|') { e++; p++; continue; }
++                if (*p == ' ') { p++; continue; }
++                row[e][len[e]++] = (int)strtol(p, &p, 10);
++            }
++            int L = e + 1;
++            if (L != hdr) { fprintf(stderr, "state width %d != header %d\n", L, hdr); return 1; }
++            for (int a = 0; a < L; a++) for (int t = 0; t < len[a]; t++) {
++                int f = row[a][t], ok = 0;
++                for (int u = 0; u < len[f]; u++) if (row[f][u] == a) ok = 1;
++                if (!ok || !nonadj[a][f] || f >= L) { fprintf(stderr, "inconsistent state %lld\n", idx); return 1; }
++            }
++            nstates_run++;
++            if (!filters_init_state(L)) { fprunes++; continue; }
++            D = 0;
++            int r = search_edge(L);
++            if (r && !count_mode) { res = 1; break; }
++            if (timed_out) break;
++        }
++        fclose(sf);
++        fprintf(stderr, "states: total seen %lld, run in this slice %lld\n", nstates, nstates_run);
++    }
+     double dt = now() - t0;
+     if (dumpf) fclose(dumpf);
+     const char *verdict = timed_out ? "TIMEOUT" : count_mode ? "COUNT" : (res ? "THRACKLEABLE" : "NOT_THRACKLEABLE");

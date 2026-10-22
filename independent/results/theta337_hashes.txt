@@ -1,0 +1,14 @@
+# sha256 and line counts of the generated files of the DB(6,10,-3) run (not included; each is rebuilt by the commands in README.md)
+# file                      lines      sha256
+AC_L8.states                143557     11e011bd4a636cddc4e22f633b5c09ef3a7ad288424ed384d75fee8c3f943ffc
+T_L9.states                 32626      f239d6d99ee3d3b49c5f5cec766fdaf41c8d7f9f83a8312c1649d74d0c131dd9
+C10H.sys                    6059712    dd7a3f269fc2d79ad0939fd905d63f3aae1d61e953e6fd8ac282da1e2dff9063
+T_L10.states                1211878    5001bde36f010e5994092fd34952666b4c91aa97ab172c522e30a230ec86a10b
+C10H.sys.pos                -          0edc29f22b42b3e245641d3c088ef375b7bee2ac26904448266d8cf04921581c
+# inputs
+theta_337.txt               -          134cbaa04bfc405ae7bfaf64ad0fea55f8f3ea93d6c51f5251f0a3ffa7d9d44e
+t337_AC.txt                 -          3ae962ab305ab0e06f70bd8ab0f6ba42b5aa6ae2342500c426a7368012ca6d2b
+t337_BC.txt                 -          2cd4e353fed979bdff898758726fcadbabdf9fd95b37d8be93bfc0baeb0d8fdc
+# static builds used for the runs: src/thr_indep_v2.c (stages A, B, C), src/thr_indep.c (C9)
+thr_indep_v2 (static)       -          7c83c8306e79a707a75af59bd1452c6f74bce2d3619e6e5f5d4c1032eb47210c
+thr_indep (static)          -          8a8d894f455d3ca16a0fa0b77a785690d355351614aef0455df6cc71a0e53615

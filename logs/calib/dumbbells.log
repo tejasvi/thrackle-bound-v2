@@ -1,0 +1,8 @@
+== H2 = C8 + pendant (sub_DB682_H2), count with C8 filter
+RESULT COUNT  complete_planar_systems=60196  planarity_tests=4627979  planar=458115  filter_prunes=101723  wall=17.19s
+== DB(6,6,-3) decision, no filters
+RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=532017  planar=43919  filter_prunes=0  wall=1.78s
+== DB(6,6,-2) decision, filters C6b + C8o
+RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=49867  planar=14563  filter_prunes=206244  wall=0.19s
+== DB(6,6,-1) (graphs/DB_6_6_-1r.txt) decision, filters C6b, Ha, Hb, H12, H45, H15
+RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=1622975  planar=294241  filter_prunes=4007751  wall=9.16s

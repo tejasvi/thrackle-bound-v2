@@ -1,0 +1,9 @@
+# 2026-10-21T21:58Z run_union.sh GRAPH NAME 280 with ./thr2 sha256 29ff618b06df4de5cd7aad8c1220ba3a5fbbdc00eb260b4edb21d78fce00c0f9
+r_u610_3_0: order [1, 7, 5, 6, 2, 0, 3, 4]; 3 cycles of length 5..8: 5 5 6
+RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=157  planar=50  filter_prunes=214  wall=0.00s
+r_u610_3_1: order [0, 5, 6, 8, 2, 1, 3, 4, 7, 9, 10, 11, 12]; 4 cycles of length 5..8: 5 5 5 6
+RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=27972  planar=4375  filter_prunes=32634  wall=0.08s
+r_u610_3_2: order [1, 7, 5, 6, 2, 0, 3, 4, 8, 9, 10, 11, 12]; 4 cycles of length 5..8: 5 5 5 6
+RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=157  planar=50  filter_prunes=214  wall=0.00s
+r_DB_5_6_-2: order [4, 3, 2, 1, 0, 5, 6, 7, 8]; 3 cycles of length 5..8: 5 6 7
+RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=1680  planar=449  filter_prunes=3438  wall=0.00s

@@ -1,0 +1,5 @@
+# merge of the C10-template list, re-run 2026-10-22T01:12Z; unfinished slices redone at level 7: 8 9 24 25 28 83 85
+merged 88 slice dumps: 1164803 systems, 360 of 537 states with systems, written chk/C10r_merged.sys
+merged 90 slice dumps: 6059712 systems, 221 of 229 states with systems, written chk/T337s_C10.sys
+e9279cbcc2f3f2642200c641dd4e8c38f6a11441ac82dee1b05773a6b5ed30dc  rerun:T337s_C10.sys
+e9279cbcc2f3f2642200c641dd4e8c38f6a11441ac82dee1b05773a6b5ed30dc  used:T337s_C10.sys

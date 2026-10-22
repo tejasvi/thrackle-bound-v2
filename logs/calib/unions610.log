@@ -1,0 +1,10 @@
+# 2026-10-21T21:57Z python3 -I -B unions610.py 6 5 4 3
+s=6: walks 0, union classes by type: {}
+s=5: walks 3, union classes by type: {'hex': 2}
+s=4: walks 4, union classes by type: {'c6c8': 3}
+s=3: walks 19, union classes by type: {'c6c8': 3, 'hex': 3, 'other': 5}
+  u610_3_0: n=7 m=8 walk=(0, 1, 2, 3, 6, 0, 5, 4, 3, 6)
+  u610_3_1: n=11 m=13 walk=(0, 1, 2, 3, 6, 0, 7, 8, 9, 10)
+  u610_3_2: n=11 m=13 walk=(0, 1, 2, 3, 6, 7, 8, 9, 10, 6)
+  u610_3_3: n=11 m=13 walk=(0, 1, 2, 3, 6, 7, 1, 8, 9, 10)
+  u610_3_4: n=12 m=13 walk=(0, 1, 2, 3, 6, 7, 8, 9, 10, 11)

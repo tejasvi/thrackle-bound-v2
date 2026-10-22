@@ -1,0 +1,9 @@
+filter sys/DB681_C8.sys: h=8 systems=2544
+filter sys/DB681_Ha.sys: h=9 systems=60196
+filter sys/DB681r_Hb.sys: h=9 systems=60196
+[61s] tests=1709859 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:17/16 e10:863/862 e11:2314/2313 e12:0/0
+[121s] tests=4260656 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:56/55 e10:1944/1943 e11:5691/5691 e12:0/0
+states: total seen 192, run in this slice 2
+[143s] tests=5317028 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:87/87 e10:2166/2166 e11:6468/6468 e12:0/0
+RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=5317028  planar=421420  filter_prunes=8869040  wall=143.33s
+choices per edge: e0:0 e1:0 e2:0 e3:0 e4:0 e5:0 e6:0 e7:0 e8:0 e9:9864 e10:404292 e11:7899515 e12:5863676

@@ -1,0 +1,5 @@
+[60s] tests=4928703 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:30/29 e8:1677/1676 e9:0/0
+states: total seen 99, run in this slice 2
+[113s] tests=9201191 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:62/62 e8:3289/3289 e9:0/0
+RESULT COUNT  complete_planar_systems=0  planarity_tests=9201191  planar=475637  filter_prunes=0  wall=112.59s
+choices per edge: e0:0 e1:0 e2:0 e3:0 e4:0 e5:0 e6:0 e7:3221 e8:269039 e9:8898288

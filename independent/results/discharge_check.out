@@ -1,0 +1,5 @@
+c = 15/11: all printed values check (x = 1/11, low = -2/11)
+c = 27/20: all printed values check (x = 1/10, low = -1/4)
+c = 51/38: all printed values check (x = 2/19, low = -11/38)
+h10 bounds from the run caps: {6: 8, 3: 7}
+ALL DISCHARGING VALUES PASS (exact)

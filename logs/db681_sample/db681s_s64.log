@@ -1,0 +1,12 @@
+filter sys/DB681_C8.sys: h=8 systems=2544
+filter sys/DB681_Ha.sys: h=9 systems=60196
+filter sys/DB681r_Hb.sys: h=9 systems=60196
+[61s] tests=1676608 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:22/21 e10:94/93 e11:2200/2199 e12:0/0
+[121s] tests=3362660 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:23/22 e10:265/264 e11:3825/3824 e12:0/0
+[182s] tests=5923132 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:24/23 e10:413/412 e11:6834/6833 e12:0/0
+[242s] tests=8699478 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:27/26 e10:676/675 e11:9738/9738 e12:0/0
+[302s] tests=11510167 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:73/72 e10:1586/1585 e11:12255/12255 e12:0/0
+states: total seen 192, run in this slice 2
+[309s] tests=11847453 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:90/90 e10:1953/1953 e11:12255/12255 e12:0/0
+RESULT NOT_THRACKLEABLE  complete_planar_systems=0  planarity_tests=11847453  planar=766995  filter_prunes=18022434  wall=308.81s
+choices per edge: e0:0 e1:0 e2:0 e3:0 e4:0 e5:0 e6:0 e7:0 e8:0 e9:9886 e10:655481 e11:11369423 e12:17814760

@@ -1,0 +1,28 @@
+filter sys/T337s_C10.sys: h=10 systems=6059712
+filter sys/T337s_C10.sys: h=10 systems=6059712
+states: total seen 32626, run in this slice 272
+[8s] tests=138337 closed/done: e0:0/0 e1:0/0 e2:0/0 e3:0/0 e4:0/0 e5:0/0 e6:0/0 e7:0/0 e8:0/0 e9:9871/9871
+PLANAR COMPLETE SYSTEM #1:
+  pi_0 (0->1): 8 9 7 5 4 2
+  pi_1 (1->2): 4 6 5 8 9 7 3
+  pi_2 (2->3): 3 7 9 8 6 0 4
+  pi_3 (0->4): 8 9 7 5 1 2
+  pi_4 (4->5): 7 6 9 8 0 2 1
+  pi_5 (5->3): 6 1 8 9 7 3 0
+  pi_6 (0->6): 1 5 2 8 9 4
+  pi_7 (6->7): 4 2 1 5 3 0 9
+  pi_8 (7->8): 0 3 5 1 2 6 4
+  pi_9 (8->9): 4 6 2 1 5 3 0 7
+PLANAR COMPLETE SYSTEM #2:
+  pi_0 (0->1): 8 7 9 5 4 2
+  pi_1 (1->2): 4 6 5 8 9 7 3
+  pi_2 (2->3): 3 7 9 8 6 0 4
+  pi_3 (0->4): 8 9 7 5 1 2
+  pi_4 (4->5): 7 6 9 8 0 2 1
+  pi_5 (5->3): 6 1 8 9 7 3 0
+  pi_6 (0->6): 1 5 2 8 9 4
+  pi_7 (6->7): 4 2 1 5 3 9 0
+  pi_8 (7->8): 0 3 5 1 2 6 4
+  pi_9 (8->9): 4 6 2 1 5 3 7 0
+RESULT COUNT  complete_planar_systems=9871  planarity_tests=138337  planar=59219  filter_prunes=540336  wall=7.72s
+choices per edge: e0:0 e1:0 e2:0 e3:0 e4:0 e5:0 e6:0 e7:0 e8:0 e9:668802

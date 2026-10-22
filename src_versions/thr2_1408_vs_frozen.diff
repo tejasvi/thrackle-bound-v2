@@ -1,0 +1,30 @@
+--- thr2_1408.c
++++ src/thr2.c
+@@ -32,6 +32,8 @@
+ static FILE *dumpf = NULL;
+ static double t0, maxsec = 1e30;
+ static int timed_out = 0;
++static FILE *loggf = NULL; static double logg_p = 0; static unsigned long long rng_state = 88172645463325252ULL;
++static double urand(void) { rng_state ^= rng_state << 13; rng_state ^= rng_state >> 7; rng_state ^= rng_state << 17; return (rng_state >> 11) * (1.0 / 9007199254740992.0); }
+ static long long level_tests[MAXE];
+ static long long choices = 0;
+ static double now(void) { struct timespec ts; clock_gettime(CLOCK_MONOTONIC, &ts); return ts.tv_sec + 1e-9 * ts.tv_nsec; }
+@@ -99,6 +101,10 @@
+     tests++;
+     int r = lr_planar(gn, gm, GU, GV);
+     if (r < 0) { fprintf(stderr, "LR capacity exceeded\n"); exit(2); }
++    if (loggf && urand() < logg_p) {
++        fprintf(loggf, "%d %d %d\n", gn, gm, r);
++        for (int i = 0; i < gm; i++) fprintf(loggf, "%d %d\n", GU[i], GV[i]);
++    }
+     if (r) planar_hits++;
+     return r;
+ }
+@@ -344,6 +350,7 @@
+         }
+         else if (!strcmp(argv[i], "--filter") && i + 1 < argc) load_filter(argv[++i]);
+         else if (!strcmp(argv[i], "--maxsec") && i + 1 < argc) maxsec = atof(argv[++i]);
++        else if (!strcmp(argv[i], "--logg") && i + 2 < argc) { loggf = fopen(argv[++i], "w"); logg_p = atof(argv[++i]); }
+         else if (!strcmp(argv[i], "--states") && i + 1 < argc) statesfile = argv[++i];
+         else if (!strcmp(argv[i], "--slice") && i + 1 < argc) { if (sscanf(argv[++i], "%d/%d", &slice_i, &slice_n) != 2) return 1; }
+         else { fprintf(stderr, "unknown arg %s\n", argv[i]); return 1; }

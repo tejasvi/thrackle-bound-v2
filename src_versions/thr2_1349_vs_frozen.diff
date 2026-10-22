@@ -1,0 +1,100 @@
+--- thr2_1349.c
++++ src/thr2.c
+@@ -32,6 +32,8 @@
+ static FILE *dumpf = NULL;
+ static double t0, maxsec = 1e30;
+ static int timed_out = 0;
++static FILE *loggf = NULL; static double logg_p = 0; static unsigned long long rng_state = 88172645463325252ULL;
++static double urand(void) { rng_state ^= rng_state << 13; rng_state ^= rng_state >> 7; rng_state ^= rng_state << 17; return (rng_state >> 11) * (1.0 / 9007199254740992.0); }
+ static long long level_tests[MAXE];
+ static long long choices = 0;
+ static double now(void) { struct timespec ts; clock_gettime(CLOCK_MONOTONIC, &ts); return ts.tv_sec + 1e-9 * ts.tv_nsec; }
+@@ -99,6 +101,10 @@
+     tests++;
+     int r = lr_planar(gn, gm, GU, GV);
+     if (r < 0) { fprintf(stderr, "LR capacity exceeded\n"); exit(2); }
++    if (loggf && urand() < logg_p) {
++        fprintf(loggf, "%d %d %d\n", gn, gm, r);
++        for (int i = 0; i < gm; i++) fprintf(loggf, "%d %d\n", GU[i], GV[i]);
++    }
+     if (r) planar_hits++;
+     return r;
+ }
+@@ -110,6 +116,7 @@
+     int inH[MAXE];           /* G-edge -> H-edge or -1 */
+     uint64_t *prec;          /* [(e*h + x)*h + y][W]: systems where on H-edge e, x precedes y */
+     uint64_t *cur;           /* [MAXD][W] */
++    int *act; int *nact;     /* active (nonzero) word indices per depth: act[MAXD][W], nact[MAXD] */
+     char name[256];
+ } Filter;
+ static Filter FL[MAXF]; static int nfl = 0;
+@@ -188,6 +195,9 @@
+     }
+     F->cur = calloc((size_t)MAXD * F->W, sizeof(uint64_t));
+     for (int s = 0; s < ns; s++) F->cur[s >> 6] |= 1ULL << (s & 63);
++    F->act = malloc(sizeof(int) * (size_t)MAXD * F->W); F->nact = calloc(MAXD, sizeof(int));
++    for (int w = 0; w < F->W; w++) F->act[w] = w;
++    F->nact[0] = F->W;
+     free(R);
+     fprintf(stderr, "filter %s: h=%d systems=%d\n", F->name, h, ns);
+ }
+@@ -197,22 +207,29 @@
+     for (int i = 0; i < nfl; i++) {
+         Filter *F = &FL[i];
+         uint64_t *src = F->cur + (size_t)D * F->W, *dst = F->cur + (size_t)(D + 1) * F->W;
+-        memcpy(dst, src, sizeof(uint64_t) * F->W);
++        int *sa = F->act + (size_t)D * F->W, *da = F->act + (size_t)(D + 1) * F->W;
++        int ns = F->nact[D];
+         int a = F->inH[k], b = F->inH[f];
+-        if (a < 0 || b < 0) continue;
++        if (a < 0 || b < 0) {
++            for (int j = 0; j < ns; j++) { int w = sa[j]; dst[w] = src[w]; da[j] = w; }
++            F->nact[D + 1] = ns;
++            continue;
++        }
+         uint64_t *cons[2 * MAXE + 4]; int nc = 0;
+         for (int j = p - 1; j >= 0; j--) { int x = F->inH[row[f][j]]; if (x >= 0) { cons[nc++] = P_(F, b, x, a); break; } }
+         for (int j = p + 1; j < len[f]; j++) { int x = F->inH[row[f][j]]; if (x >= 0) { cons[nc++] = P_(F, b, a, x); break; } }
+         for (int j = t - 1; j >= 0; j--) { int x = F->inH[row[k][j]]; if (x >= 0) { cons[nc++] = P_(F, a, x, b); break; } }
+         for (int q = 0; q < k; q++)
+             if (nonadj[k][q] && !used[k][q] && F->inH[q] >= 0) cons[nc++] = P_(F, a, b, F->inH[q]);
+-        uint64_t any = 0;
+-        for (int w = 0; w < F->W; w++) {
+-            uint64_t v = dst[w];
+-            for (int c = 0; c < nc; c++) v &= cons[c][w];
+-            dst[w] = v; any |= v;
++        int nd = 0;
++        for (int j = 0; j < ns; j++) {
++            int w = sa[j];
++            uint64_t v = src[w];
++            for (int c = 0; c < nc && v; c++) v &= cons[c][w];
++            if (v) { dst[w] = v; da[nd++] = w; }
+         }
+-        if (!any) { fprunes++; return 0; }
++        F->nact[D + 1] = nd;
++        if (!nd) { fprunes++; return 0; }
+     }
+     return 1;
+ }
+@@ -235,9 +252,10 @@
+                 prev = x;
+             }
+         }
+-        uint64_t any = 0;
+-        for (int w = 0; w < F->W; w++) any |= c[w];
+-        if (!any) return 0;
++        int nd = 0;
++        for (int w = 0; w < F->W; w++) if (c[w]) F->act[nd++] = w;
++        F->nact[0] = nd;
++        if (!nd) return 0;
+     }
+     return 1;
+ }
+@@ -332,6 +350,7 @@
+         }
+         else if (!strcmp(argv[i], "--filter") && i + 1 < argc) load_filter(argv[++i]);
+         else if (!strcmp(argv[i], "--maxsec") && i + 1 < argc) maxsec = atof(argv[++i]);
++        else if (!strcmp(argv[i], "--logg") && i + 2 < argc) { loggf = fopen(argv[++i], "w"); logg_p = atof(argv[++i]); }
+         else if (!strcmp(argv[i], "--states") && i + 1 < argc) statesfile = argv[++i];
+         else if (!strcmp(argv[i], "--slice") && i + 1 < argc) { if (sscanf(argv[++i], "%d/%d", &slice_i, &slice_n) != 2) return 1; }
+         else { fprintf(stderr, "unknown arg %s\n", argv[i]); return 1; }

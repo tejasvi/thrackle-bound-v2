@@ -1,0 +1,8 @@
+# vertex-mode classes that are not excluded by a triangle or a C4; filters: both 6-cycles. DB(6,6,0): see db6_6_split.json
+u66_023_other.txt other n=9 m=11 filters C:8 D:8 :: RESULT graph=unions66/u66_023_other.txt m=11 complete_planar=0 NOT_THRACKLEABLE tests=445031 planar_tests=39163 dumped=0 resumed=0 filtered_at_resume=0 secs=11.0 (11.0s)
+u66_030_other.txt other n=10 m=12 filters C:8 D:8 :: RESULT graph=unions66/u66_030_other.txt m=12 complete_planar=0 NOT_THRACKLEABLE tests=530895 planar_tests=43645 dumped=0 resumed=0 filtered_at_resume=0 secs=13.3 (13.3s)
+u66_007_DB6_6_-2.txt DB(6,6,-2) n=9 m=10 filters C:8 D:8 :: RESULT graph=unions66/u66_007_DB6_6_-2.txt m=10 complete_planar=0 NOT_THRACKLEABLE tests=1543490 planar_tests=131947 dumped=0 resumed=0 filtered_at_resume=0 secs=46.3 (46.3s)
+u66_010_other.txt other n=10 m=12 filters C:8 D:8 :: RESULT graph=unions66/u66_010_other.txt m=12 complete_planar=0 NOT_THRACKLEABLE tests=28799763 planar_tests=1718385 dumped=0 resumed=0 filtered_at_resume=0 secs=835.6 (835.6s)
+u66_001_DB6_6_-1.txt DB(6,6,-1) n=10 m=11 filters C:8 D:8 :: RESULT graph=unions66/u66_001_DB6_6_-1.txt m=11 complete_planar=0 NOT_THRACKLEABLE tests=85971808 planar_tests=5166914 dumped=0 resumed=0 filtered_at_resume=0 secs=2731.8 (2731.8s)
+u66_036_DB6_6_-3.txt DB(6,6,-3) n=8 m=9 filters C:8 D:8 :: RESULT graph=unions66/u66_036_DB6_6_-3.txt m=9 complete_planar=0 NOT_THRACKLEABLE tests=63753 planar_tests=8319 dumped=0 resumed=0 filtered_at_resume=0 secs=0.5 (0.5s)
+u66_073_other.txt other n=8 m=10 filters C:8 D:8 :: RESULT graph=unions66/u66_073_other.txt m=10 complete_planar=0 NOT_THRACKLEABLE tests=8802 planar_tests=1254 dumped=0 resumed=0 filtered_at_resume=0 secs=0.1 (0.1s)

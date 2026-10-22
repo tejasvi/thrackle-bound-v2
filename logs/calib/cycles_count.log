@@ -1,0 +1,12 @@
+== C3 count (thr2, no filters)
+RESULT COUNT  complete_planar_systems=1  planarity_tests=3  planar=3  filter_prunes=0  wall=0.00s
+== C4 count (thr2, no filters)
+RESULT COUNT  complete_planar_systems=0  planarity_tests=6  planar=5  filter_prunes=0  wall=0.00s
+== C5 count (thr2, no filters)
+RESULT COUNT  complete_planar_systems=1  planarity_tests=50  planar=29  filter_prunes=0  wall=0.00s
+== C6 count (thr2, no filters)
+RESULT COUNT  complete_planar_systems=8  planarity_tests=1177  planar=329  filter_prunes=0  wall=0.00s
+== C7 count (thr2, no filters)
+RESULT COUNT  complete_planar_systems=92  planarity_tests=46985  planar=7672  filter_prunes=0  wall=0.11s
+== C8 count (thr2, no filters)
+RESULT COUNT  complete_planar_systems=2544  planarity_tests=2629879  planar=273969  filter_prunes=0  wall=7.59s

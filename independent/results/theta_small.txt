@@ -1,0 +1,6 @@
+# theta(2,3,3) = theta/theta_233.txt and theta(2,3,4) = theta/theta_234.txt, no filters, --decide;
+# for each graph first src/thr_indep.c (version 1), then src/thr_indep_v2.c (version 2)
+RESULT graph=theta/theta_233.txt m=8 complete_planar=0 NOT_THRACKLEABLE tests=17578 planar_tests=2280 dumped=0 resumed=0 filtered_at_resume=0 secs=0.1
+RESULT graph=theta/theta_233.txt m=8 complete_planar=0 NOT_THRACKLEABLE tests=17578 planar_tests=2280 dumped=0 resumed=0 filtered_at_resume=0 secs=0.1
+RESULT graph=theta/theta_234.txt m=9 complete_planar=0 NOT_THRACKLEABLE tests=856864 planar_tests=71929 dumped=0 resumed=0 filtered_at_resume=0 secs=7.6
+RESULT graph=theta/theta_234.txt m=9 complete_planar=0 NOT_THRACKLEABLE tests=856864 planar_tests=71929 dumped=0 resumed=0 filtered_at_resume=0 secs=7.4

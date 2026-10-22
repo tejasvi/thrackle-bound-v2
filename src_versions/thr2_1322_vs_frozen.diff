@@ -1,0 +1,247 @@
+--- thr2_1322.c
++++ src/thr2.c
+@@ -32,10 +32,19 @@
+ static FILE *dumpf = NULL;
+ static double t0, maxsec = 1e30;
+ static int timed_out = 0;
++static FILE *loggf = NULL; static double logg_p = 0; static unsigned long long rng_state = 88172645463325252ULL;
++static double urand(void) { rng_state ^= rng_state << 13; rng_state ^= rng_state >> 7; rng_state ^= rng_state << 17; return (rng_state >> 11) * (1.0 / 9007199254740992.0); }
+ static long long level_tests[MAXE];
+ static long long choices = 0;
+-
+ static double now(void) { struct timespec ts; clock_gettime(CLOCK_MONOTONIC, &ts); return ts.tv_sec + 1e-9 * ts.tv_nsec; }
++static long long closed_cnt[MAXE], done_cnt[MAXE];
++static double last_prog = 0;
++static void progress(void) {
++    fprintf(stderr, "[%.0fs] tests=%lld closed/done:", now() - t0, tests);
++    for (int k = 0; k < m; k++) fprintf(stderr, " e%d:%lld/%lld", k, closed_cnt[k], done_cnt[k]);
++    fprintf(stderr, "\n");
++}
++
+ 
+ /* ---------- G' construction and planarity ---------- */
+ static int GU[LR_MAXM], GV[LR_MAXM], gm, gn;
+@@ -92,6 +101,10 @@
+     tests++;
+     int r = lr_planar(gn, gm, GU, GV);
+     if (r < 0) { fprintf(stderr, "LR capacity exceeded\n"); exit(2); }
++    if (loggf && urand() < logg_p) {
++        fprintf(loggf, "%d %d %d\n", gn, gm, r);
++        for (int i = 0; i < gm; i++) fprintf(loggf, "%d %d\n", GU[i], GV[i]);
++    }
+     if (r) planar_hits++;
+     return r;
+ }
+@@ -103,6 +116,7 @@
+     int inH[MAXE];           /* G-edge -> H-edge or -1 */
+     uint64_t *prec;          /* [(e*h + x)*h + y][W]: systems where on H-edge e, x precedes y */
+     uint64_t *cur;           /* [MAXD][W] */
++    int *act; int *nact;     /* active (nonzero) word indices per depth: act[MAXD][W], nact[MAXD] */
+     char name[256];
+ } Filter;
+ static Filter FL[MAXF]; static int nfl = 0;
+@@ -117,7 +131,7 @@
+     if (!eq) { fprintf(stderr, "bad filter spec\n"); exit(1); }
+     *eq = 0; strncpy(F->name, buf, 255);
+     int h = 0;
+-    for (char *tok = strtok(eq + 1, ","); tok; tok = strtok(NULL, ",")) F->hmap[h++] = atoi(tok);
++    for (char *tok = strtok(eq + 1, ","); tok; tok = strtok(NULL, ",")) F->hmap[h++] = (tok[0] == 'x') ? -1 : atoi(tok);
+     FILE *fp = fopen(buf, "r");
+     if (!fp) { fprintf(stderr, "cannot open %s\n", buf); exit(1); }
+     int hh, nH;
+@@ -127,6 +141,7 @@
+     for (int i = 0; i < h; i++) {
+         if (fscanf(fp, "%d %d", &HU[i], &HV[i]) != 2) exit(1);
+         int g = F->hmap[i];
++        if (g < 0) continue;
+         int a[2] = {HU[i], HV[i]}, b[2] = {EU[g], EV[g]};
+         for (int s = 0; s < 2; s++) {
+             if (vmap[a[s]] < 0) vmap[a[s]] = b[s];
+@@ -136,7 +151,7 @@
+     for (int i = 0; i < nH; i++) for (int j = i + 1; j < nH; j++)
+         if (vmap[i] >= 0 && vmap[i] == vmap[j]) { fprintf(stderr, "filter %s: vertex map not injective\n", buf); exit(1); }
+     for (int g = 0; g < m; g++) F->inH[g] = -1;
+-    for (int i = 0; i < h; i++) F->inH[F->hmap[i]] = i;
++    for (int i = 0; i < h; i++) if (F->hmap[i] >= 0) F->inH[F->hmap[i]] = i;
+     /* read systems */
+     int cap = 1024, ns = 0;
+     int *R = malloc(sizeof(int) * (size_t)cap * h * h);   /* rank[s][e][x] */
+@@ -162,6 +177,7 @@
+     for (int s = 0; s < ns; s++)
+         for (int e = 0; e < h; e++)
+             for (int x = 0; x < h; x++) {
++                if (F->hmap[e] < 0 || F->hmap[x] < 0) continue;
+                 int want = nonadj[F->hmap[e]][F->hmap[x]];
+                 int have = R[(size_t)s * h * h + e * h + x] >= 0;
+                 if (want != have) { fprintf(stderr, "filter %s: partner set mismatch\n", buf); exit(1); }
+@@ -179,6 +195,9 @@
+     }
+     F->cur = calloc((size_t)MAXD * F->W, sizeof(uint64_t));
+     for (int s = 0; s < ns; s++) F->cur[s >> 6] |= 1ULL << (s & 63);
++    F->act = malloc(sizeof(int) * (size_t)MAXD * F->W); F->nact = calloc(MAXD, sizeof(int));
++    for (int w = 0; w < F->W; w++) F->act[w] = w;
++    F->nact[0] = F->W;
+     free(R);
+     fprintf(stderr, "filter %s: h=%d systems=%d\n", F->name, h, ns);
+ }
+@@ -188,22 +207,55 @@
+     for (int i = 0; i < nfl; i++) {
+         Filter *F = &FL[i];
+         uint64_t *src = F->cur + (size_t)D * F->W, *dst = F->cur + (size_t)(D + 1) * F->W;
+-        memcpy(dst, src, sizeof(uint64_t) * F->W);
++        int *sa = F->act + (size_t)D * F->W, *da = F->act + (size_t)(D + 1) * F->W;
++        int ns = F->nact[D];
+         int a = F->inH[k], b = F->inH[f];
+-        if (a < 0 || b < 0) continue;
++        if (a < 0 || b < 0) {
++            for (int j = 0; j < ns; j++) { int w = sa[j]; dst[w] = src[w]; da[j] = w; }
++            F->nact[D + 1] = ns;
++            continue;
++        }
+         uint64_t *cons[2 * MAXE + 4]; int nc = 0;
+         for (int j = p - 1; j >= 0; j--) { int x = F->inH[row[f][j]]; if (x >= 0) { cons[nc++] = P_(F, b, x, a); break; } }
+         for (int j = p + 1; j < len[f]; j++) { int x = F->inH[row[f][j]]; if (x >= 0) { cons[nc++] = P_(F, b, a, x); break; } }
+         for (int j = t - 1; j >= 0; j--) { int x = F->inH[row[k][j]]; if (x >= 0) { cons[nc++] = P_(F, a, x, b); break; } }
+         for (int q = 0; q < k; q++)
+             if (nonadj[k][q] && !used[k][q] && F->inH[q] >= 0) cons[nc++] = P_(F, a, b, F->inH[q]);
+-        uint64_t any = 0;
+-        for (int w = 0; w < F->W; w++) {
+-            uint64_t v = dst[w];
+-            for (int c = 0; c < nc; c++) v &= cons[c][w];
+-            dst[w] = v; any |= v;
++        int nd = 0;
++        for (int j = 0; j < ns; j++) {
++            int w = sa[j];
++            uint64_t v = src[w];
++            for (int c = 0; c < nc && v; c++) v &= cons[c][w];
++            if (v) { dst[w] = v; da[nd++] = w; }
++        }
++        F->nact[D + 1] = nd;
++        if (!nd) { fprunes++; return 0; }
++    }
++    return 1;
++}
++
++/* init filter bitsets (depth 0) from the current complete state of edges 0..L-1 */
++static int filters_init_state(int L) {
++    for (int i = 0; i < nfl; i++) {
++        Filter *F = &FL[i];
++        uint64_t *c = F->cur;
++        memset(c, 0, sizeof(uint64_t) * F->W);
++        for (int s2 = 0; s2 < F->nsys; s2++) c[s2 >> 6] |= 1ULL << (s2 & 63);
++        for (int e = 0; e < L; e++) {
++            int a = F->inH[e];
++            if (a < 0) continue;
++            int prev = -1;
++            for (int t = 0; t < len[e]; t++) {
++                int x = F->inH[row[e][t]];
++                if (x < 0) continue;
++                if (prev >= 0) { uint64_t *p = P_(F, a, prev, x); for (int w = 0; w < F->W; w++) c[w] &= p[w]; }
++                prev = x;
++            }
+         }
+-        if (!any) { fprunes++; return 0; }
++        int nd = 0;
++        for (int w = 0; w < F->W; w++) if (c[w]) F->act[nd++] = w;
++        F->nact[0] = nd;
++        if (!nd) return 0;
+     }
+     return 1;
+ }
+@@ -215,7 +267,12 @@
+ static int trace(int k, int t) {
+     if (timed_out) return 0;
+     if (t == nF[k]) {
+-        if (build_and_test(k, 1)) return search_edge(k + 1);
++        if (build_and_test(k, 1)) {
++            closed_cnt[k]++;
++            int r = search_edge(k + 1);
++            if (!timed_out) done_cnt[k]++;
++            return r;
++        }
+         return 0;
+     }
+     for (int q = 0; q < nF[k]; q++) {
+@@ -236,7 +293,11 @@
+             }
+             for (int j = p; j < len[f] - 1; j++) row[f][j] = row[f][j + 1];
+             len[f]--;
+-            if ((++choices & 0xFFFF) == 0 && now() - t0 > maxsec) timed_out = 1;
++            if ((++choices & 0xFFFF) == 0) {
++                double tn = now() - t0;
++                if (tn > maxsec) timed_out = 1;
++                if (tn - last_prog > 60) { last_prog = tn; progress(); }
++            }
+             if (timed_out) { len[k] = t; used[k][f] = 0; return 0; }
+         }
+         len[k] = t;
+@@ -269,6 +330,8 @@
+     return trace(k, 0);
+ }
+ 
++static char *statesfile = NULL; static int slice_i = 0, slice_n = 1;
++
+ int main(int argc, char **argv) {
+     if (argc < 2) { fprintf(stderr, "usage: thr2 GRAPH [--count] [--dump FILE] [--filter SYS=map]... [--maxsec S]\n"); return 1; }
+     FILE *fp = fopen(argv[1], "r");
+@@ -287,6 +350,9 @@
+         }
+         else if (!strcmp(argv[i], "--filter") && i + 1 < argc) load_filter(argv[++i]);
+         else if (!strcmp(argv[i], "--maxsec") && i + 1 < argc) maxsec = atof(argv[++i]);
++        else if (!strcmp(argv[i], "--logg") && i + 2 < argc) { loggf = fopen(argv[++i], "w"); logg_p = atof(argv[++i]); }
++        else if (!strcmp(argv[i], "--states") && i + 1 < argc) statesfile = argv[++i];
++        else if (!strcmp(argv[i], "--slice") && i + 1 < argc) { if (sscanf(argv[++i], "%d/%d", &slice_i, &slice_n) != 2) return 1; }
+         else { fprintf(stderr, "unknown arg %s\n", argv[i]); return 1; }
+     }
+     for (int k = 0; k < m; k++) {
+@@ -294,12 +360,49 @@
+         for (int f = 0; f < k; f++) if (nonadj[k][f]) FF[k][nF[k]++] = f;
+     }
+     t0 = now();
+-    int res = search_edge(0);
++    int res = 0;
++    long long nstates = 0, nstates_run = 0;
++    if (!statesfile) res = search_edge(0);
++    else {
++        FILE *sf = fopen(statesfile, "r");
++        if (!sf) { fprintf(stderr, "cannot open states\n"); return 1; }
++        static char line[1 << 16];
++        int hdr = 0;
++        while (fgets(line, sizeof line, sf)) {
++            if (line[0] == 'H') { int hh, nh; sscanf(line, "H %d %d", &hh, &nh); hdr = hh; for (int q = 0; q < hh; q++) if (!fgets(line, sizeof line, sf)) return 1; continue; }
++            if (line[0] == '\n') continue;
++            long long idx = nstates++;
++            if (idx % slice_n != slice_i) continue;
++            memset(len, 0, sizeof len); memset(used, 0, sizeof used);
++            char *p = line; int e = 0;
++            while (*p && *p != '\n') {
++                if (*p == '|') { e++; p++; continue; }
++                if (*p == ' ') { p++; continue; }
++                row[e][len[e]++] = (int)strtol(p, &p, 10);
++            }
++            int L = e + 1;
++            if (L != hdr) { fprintf(stderr, "state width %d != header %d\n", L, hdr); return 1; }
++            for (int a = 0; a < L; a++) for (int t = 0; t < len[a]; t++) {
++                int f = row[a][t], ok = 0;
++                for (int u = 0; u < len[f]; u++) if (row[f][u] == a) ok = 1;
++                if (!ok || !nonadj[a][f] || f >= L) { fprintf(stderr, "inconsistent state %lld\n", idx); return 1; }
++            }
++            nstates_run++;
++            if (!filters_init_state(L)) { fprunes++; continue; }
++            D = 0;
++            int r = search_edge(L);
++            if (r && !count_mode) { res = 1; break; }
++            if (timed_out) break;
++        }
++        fclose(sf);
++        fprintf(stderr, "states: total seen %lld, run in this slice %lld\n", nstates, nstates_run);
++    }
+     double dt = now() - t0;
+     if (dumpf) fclose(dumpf);
+     const char *verdict = timed_out ? "TIMEOUT" : count_mode ? "COUNT" : (res ? "THRACKLEABLE" : "NOT_THRACKLEABLE");
+     printf("RESULT %s  complete_planar_systems=%lld  planarity_tests=%lld  planar=%lld  filter_prunes=%lld  wall=%.2fs\n",
+            verdict, complete_found, tests, planar_hits, fprunes, dt);
++    progress();
+     printf("choices per edge:");
+     for (int k = 0; k < m; k++) printf(" e%d:%lld", k, level_tests[k]);
+     printf("\n");
